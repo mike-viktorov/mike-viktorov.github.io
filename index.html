@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Михаил Викторов — тренер по тайскому боксу и боксу</title>
+  <meta name="description" content="Михаил Викторов — тренер по тайскому боксу и боксу. Готовлю спортсменов до уровня соревнований. Бережный подход к нагрузкам. Клуб «Сварог», Малыгина 3с2." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f100e;
+      --surface:#171816;
+      --surface2:#121311;
+      --text:#f2efe9;
+      --muted:#b9aea1;
+      --accent:#8c1f1f;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius:18px;
+      --max:1160px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(140,31,31,.35), transparent 60%),
+                  radial-gradient(900px 700px at 90% 10%, rgba(185,174,161,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    /* subtle grain */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+      mix-blend-mode:soft-light;
+      opacity:.28;
+      z-index:0;
+    }
+
+    a{color:inherit; text-decoration:none}
+    a:hover{color:var(--text)}
+    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .section{padding:84px 0; position:relative; z-index:1}
+    .section-tight{padding:60px 0}
+    .kicker{
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    h1,h2,h3{margin:0}
+    h2{
+      font-size:34px;
+      letter-spacing:.02em;
+      line-height:1.1;
+    }
+    p{margin:0}
+    .muted{color:var(--muted)}
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--border), transparent);
+      margin:0;
+      border:none;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(10px);
+      background:rgba(15,16,14,.68);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+    .logo{
+      width:34px; height:34px;
+      border-radius:10px;
+      background: radial-gradient(12px 12px at 30% 30%, rgba(185,174,161,.35), transparent 60%),
+                  linear-gradient(145deg, rgba(140,31,31,.75), rgba(140,31,31,.25));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 28px rgba(140,31,31,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"V";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-family:"Bebas Neue", Inter, sans-serif;
+      font-size:22px;
+      letter-spacing:.08em;
+      color:rgba(242,239,233,.9);
+      transform: translateY(1px);
+    }
+    .brand-title{
+      display:flex; flex-direction:column; line-height:1.05;
+    }
+    .brand-title strong{font-size:13px}
+    .brand-title span{font-size:12px; color:var(--muted)}
+    .nav{
+      display:flex; align-items:center; gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:13px;
+      color:rgba(242,239,233,.84);
+      padding:6px 8px;
+      border-radius:10px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{
+      border-color:var(--border);
+      background:rgba(255,255,255,.03);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.18)}
+    .btn:active{transform:translateY(0)}
+    .btn-primary{
+      background:linear-gradient(145deg, rgba(140,31,31,.98), rgba(140,31,31,.72));
+      border-color:rgba(140,31,31,.35);
+      box-shadow: 0 22px 60px rgba(140,31,31,.24);
+    }
+    .btn-primary:hover{
+      background:linear-gradient(145deg, rgba(140,31,31,1), rgba(140,31,31,.78));
+      border-color:rgba(185,174,161,.22);
+    }
+
+    /* Hero */
+    .hero{
+      padding:70px 0 40px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .hero h1{
+      font-family:"Bebas Neue", Inter, sans-serif;
+      font-size:72px;
+      letter-spacing:.06em;
+      line-height:.92;
+      margin-top:10px;
+    }
+    .hero .subtitle{
+      font-size:18px;
+      color:rgba(242,239,233,.9);
+      margin-top:14px;
+      max-width: 52ch;
+    }
+    .hero .cta-row{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:22px;
+      align-items:center;
+    }
+    .helper{
+      font-size:12px;
+      color:rgba(185,174,161,.92);
+      margin-top:10px;
+      max-width:62ch;
+    }
+    .chips{
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+    .chip{
+      font-size:12px;
+      color:rgba(242,239,233,.9);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .hero-card{
+      position:relative;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:
+        radial-gradient(500px 260px at 40% 20%, rgba(140,31,31,.30), transparent 60%),
+        radial-gradient(520px 360px at 80% 70%, rgba(185,174,161,.12), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      min-height: 420px;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(320px 200px at 30% 20%, rgba(185,174,161,.18), transparent 60%);
+      opacity:.9;
+    }
+    .hero-card .watermark{
+      position:absolute;
+      inset:auto -90px -120px auto;
+      width: 420px;
+      height: 420px;
+      border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(185,174,161,.12), transparent 60%),
+                  radial-gradient(circle at 70% 60%, rgba(140,31,31,.22), transparent 65%);
+      opacity:.75;
+      transform: rotate(-12deg);
+    }
+    .hero-card .img{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      padding:22px;
+    }
+    .placeholder{
+      width:100%;
+      height:100%;
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.34));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      padding:18px;
+    }
+    .placeholder strong{font-size:14px}
+    .placeholder span{font-size:12px; color:var(--muted); max-width: 44ch}
+    .line-accent{
+      height:3px;
+      width:68px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, rgba(140,31,31,.95), transparent);
+      margin-top:16px;
+    }
+
+    /* Cards / grids */
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start}
+    .grid-3{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px}
+    .card{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border-radius:var(--radius);
+      box-shadow: 0 10px 34px rgba(0,0,0,.25);
+      overflow:hidden;
+      transform: translateY(0);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .card-pad{padding:18px}
+    .card:hover{
+      border-color:rgba(185,174,161,.20);
+      transform: translateY(-1px);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.012));
+    }
+    .card-title{
+      font-weight:800;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+    ul.clean{
+      margin:0;
+      padding-left:18px;
+      color:rgba(242,239,233,.92);
+    }
+    ul.clean li{margin:7px 0}
+    .callout{
+      margin-top:14px;
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(140,31,31,.26);
+      background: radial-gradient(380px 120px at 20% 20%, rgba(140,31,31,.22), transparent 60%),
+                  rgba(140,31,31,.10);
+      color:rgba(242,239,233,.92);
+      font-weight:600;
+    }
+
+    /* Athletes */
+    .athlete-top{
+      height:120px;
+      background:
+        radial-gradient(300px 120px at 25% 30%, rgba(140,31,31,.40), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.35));
+      border-bottom:1px solid var(--border);
+      position:relative;
+    }
+    .badge{
+      position:absolute;
+      right:12px; bottom:12px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(185,174,161,.22);
+      background:rgba(0,0,0,.25);
+      color:rgba(242,239,233,.92);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Wins carousel */
+    .wins-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+    }
+    .wins-sub{font-size:13px; color:var(--muted)}
+    .carousel{
+      display:flex;
+      gap:14px;
+      overflow:auto;
+      padding-bottom:10px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .carousel::-webkit-scrollbar{height:10px}
+    .carousel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.10); border-radius:999px}
+    .win{
+      flex: 0 0 220px;
+      scroll-snap-align:start;
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(255,255,255,.02);
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .win:hover{
+      transform: translateY(-1px);
+      border-color:rgba(185,174,161,.20);
+    }
+    .win-img{
+      height:220px;
+      background:
+        radial-gradient(240px 160px at 30% 30%, rgba(185,174,161,.14), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.40));
+      position:relative;
+      border-bottom:1px solid var(--border);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:12px;
+      color:rgba(242,239,233,.92);
+    }
+    .medal{
+      position:absolute;
+      top:12px; left:12px;
+      width:40px; height:40px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.25);
+      display:grid; place-items:center;
+      font-size:20px;
+      backdrop-filter: blur(6px);
+    }
+    .win-body{padding:12px}
+    .win-body strong{display:block; font-size:14px}
+    .win-body span{display:block; font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* Formats */
+    .tile{
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:rgba(255,255,255,.02);
+      transition: transform .12s ease, border-color .12s ease;
+    }
+    .tile:hover{
+      transform: translateY(-1px);
+      border-color:rgba(185,174,161,.20);
+    }
+    .tile b{display:block; font-size:14px}
+    .tile span{display:block; margin-top:6px; color:var(--muted); font-size:12px}
+
+    /* Social cards */
+    .social-card{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      padding:18px;
+    }
+    .icon{
+      width:42px; height:42px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(145deg, rgba(140,31,31,.45), rgba(255,255,255,.03));
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .social-card .text{flex:1}
+    .social-card .text b{display:block; font-size:15px}
+    .social-card .text span{display:block; font-size:12px; color:var(--muted); margin-top:4px}
+
+    /* Location */
+    .map{
+      min-height:260px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      background:rgba(255,255,255,.02);
+    }
+    .map iframe{width:100%; height:100%; border:0; filter: grayscale(0.2) contrast(1.05) brightness(0.85);}
+
+    /* Footer CTA */
+    .footer-cta{
+      padding:28px;
+      border-radius:22px;
+      border:1px solid rgba(140,31,31,.22);
+      background:
+        radial-gradient(520px 240px at 20% 10%, rgba(140,31,31,.30), transparent 60%),
+        radial-gradient(520px 240px at 90% 80%, rgba(185,174,161,.12), transparent 60%),
+        rgba(255,255,255,.02);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      box-shadow: 0 18px 60px rgba(140,31,31,.16);
+    }
+    .footer-cta h3{
+      font-family:"Bebas Neue";
+      font-size:34px;
+      letter-spacing:.06em;
+      line-height:1.0;
+    }
+    .footer-links{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:8px;
+      color:rgba(242,239,233,.88);
+      font-size:13px;
+    }
+    .footer-links a{
+      border:1px solid var(--border);
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+    }
+    .footer-links a:hover{border-color:rgba(185,174,161,.22)}
+    .copyright{
+      margin-top:18px;
+      font-size:12px;
+      color:rgba(185,174,161,.88);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr; }
+      .hero-card{min-height: 360px}
+      .grid-3{grid-template-columns: 1fr; }
+      .grid-2{grid-template-columns: 1fr; }
+      .nav{display:none}
+      .brand{min-width:auto}
+      .hero h1{font-size:60px}
+      h2{font-size:30px}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="brand" href="#top">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="brand-title">
+            <strong>Михаил Викторов</strong>
+            <span>тайский бокс · бокс</span>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Социальные ссылки">
+          <a href="https://www.instagram.com/mishasever75/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://t.me/viktorov_team" target="_blank" rel="noopener">Telegram команды</a>
+          <a href="https://vk.com/mktbrus" target="_blank" rel="noopener">VK</a>
+        </nav>
+
+        <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">
+          Написать
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">Тренировки в Москве · клуб «Сварог»</div>
+          <h1>МИХАИЛ<br>ВИКТОРОВ</h1>
+          <div class="line-accent"></div>
+
+          <p class="subtitle">
+            Я тренирую <b>тайский бокс</b> и <b>бокс</b>.<br>
+            Готовлю спортсменов до уровня соревнований. Новичков ставлю на технику с нуля.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">
+              Написать мне в Telegram
+            </a>
+            <a class="btn" href="https://www.instagram.com/mishasever75/" target="_blank" rel="noopener">
+              Смотреть Instagram
+            </a>
+          </div>
+
+          <div class="helper">
+            Если есть сомнения по здоровью или нагрузке — напиши. Обсудим формат и подберём старт спокойно.
+          </div>
+
+          <div class="chips" aria-label="Короткие факты">
+            <span class="chip">Мастер спорта по боксу</span>
+            <span class="chip">КМС по тайскому боксу</span>
+            <span class="chip">Тренер Федерации тайского бокса Москвы</span>
+            <span class="chip">Тренер сборной Москвы</span>
+            <span class="chip">20+ лет опыта</span>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Главный визуал">
+          <div class="watermark" aria-hidden="true"></div>
+          <div class="img">
+            <!-- TODO: заменишь placeholder на реальное фото (img) -->
+            <div class="placeholder">
+              <strong>Здесь будет сильное фото</strong>
+              <span>Лучше всего: я в зале / с командой / с перчатками. Один яркий кадр + тёмный градиент.</span>
+              <span class="muted">Пока оставил стильный плейсхолдер — выглядит достойно даже без фото.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <hr class="divider">
+
+  <!-- FOR WHO -->
+  <section class="section" id="forwho">
+    <div class="container grid-2">
+      <div>
+        <div class="kicker">Кому подойдёт</div>
+        <h2>Кому я подойду</h2>
+        <p class="muted" style="margin-top:10px; max-width:56ch">
+          Я работаю на результат: техника, физика, дисциплина и понятный прогресс.
+        </p>
+        <div class="callout">
+          Я внимательно слежу за состоянием спортсменов и подстраиваю нагрузку индивидуально — без «ушатать на первой тренировке».
+        </div>
+      </div>
+
+      <div class="card card-pad">
+        <div class="card-title">Приходи, если ты:</div>
+        <ul class="clean">
+          <li>хочешь начать <b>с нуля</b> и быстро встать на технику</li>
+          <li>уже тренируешься и хочешь <b>реального роста</b></li>
+          <li>думаешь о <b>соревнованиях</b> и хочешь подготовки</li>
+          <li>хочешь форму, уверенность и дисциплину</li>
+          <li>ценишь честную работу без показухи</li>
+          <li>ищешь тренера, который доводит до результата</li>
+        </ul>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">
+          <span class="muted" style="font-size:12px; max-width:52ch">
+            Напиши мне — я уточню уровень и цель и подскажу, как лучше стартовать.
+          </span>
+          <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать мне</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- MY CHAMPIONS -->
+  <section class="section" id="champions">
+    <div class="container">
+      <div class="kicker">Результаты</div>
+      <h2 style="margin-top:8px">Мои чемпионы</h2>
+
+      <div class="grid-3" style="margin-top:18px">
+        <article class="card">
+          <div class="athlete-top">
+            <div class="badge">GLORY</div>
+          </div>
+          <div class="card-pad">
+            <div class="card-title">🥊 Альмира Тишурина</div>
+            <ul class="clean">
+              <li>чемпионка Кубка Москвы</li>
+              <li>чемпионка Москвы</li>
+              <li>чемпионка Кубка России</li>
+              <li>чемпионка России</li>
+              <li>чемпионка мира</li>
+              <li>участница проф. боёв <b>GLORY (Нидерланды)</b></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="athlete-top">
+            <div class="badge">Кубки</div>
+          </div>
+          <div class="card-pad">
+            <div class="card-title">🥊 Дмитрий Викторов</div>
+            <ul class="clean">
+              <li>призёр Кубка России</li>
+              <li>призёр Кубка Кавказа</li>
+              <li>призёр Кубка Москвы</li>
+              <li>призёр чемпионата Москвы</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="athlete-top">
+            <div class="badge">Russian Challenge</div>
+          </div>
+          <div class="card-pad">
+            <div class="card-title">🥊 Павел Хандохин</div>
+            <ul class="clean">
+              <li>призёр чемпионата Москвы</li>
+              <li>призёр Кубка Москвы</li>
+              <li>участник проф. боёв <b>Russian Challenge</b></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <p class="muted" style="margin-top:14px">
+        Результаты — не слова. Это системная работа.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LATEST ACHIEVEMENTS -->
+  <section class="section" id="wins">
+    <div class="container">
+      <div class="wins-head">
+        <div>
+          <div class="kicker">Команда</div>
+          <h2 style="margin-top:8px">Последние достижения</h2>
+        </div>
+        <div class="wins-sub">Обновляю после соревнований</div>
+      </div>
+
+      <div class="carousel" aria-label="Последние достижения (лента)">
+        <!-- TODO: заменяй заглушки на реальные фото и подписи -->
+        <div class="win">
+          <div class="win-img">
+            <div class="medal" aria-hidden="true">🥇</div>
+            <div class="muted">Фото спортсмена</div>
+          </div>
+          <div class="win-body">
+            <strong>Имя Фамилия</strong>
+            <span>Чемпионат Москвы, 2025</span>
+          </div>
+        </div>
+
+        <div class="win">
+          <div class="win-img">
+            <div class="medal" aria-hidden="true">🥈</div>
+            <div class="muted">Фото спортсмена</div>
+          </div>
+          <div class="win-body">
+            <strong>Имя Фамилия</strong>
+            <span>Кубок Москвы, 2025</span>
+          </div>
+        </div>
+
+        <div class="win">
+          <div class="win-img">
+            <div class="medal" aria-hidden="true">🥉</div>
+            <div class="muted">Фото спортсмена</div>
+          </div>
+          <div class="win-body">
+            <strong>Имя Фамилия</strong>
+            <span>Открытый турнир, 2025</span>
+          </div>
+        </div>
+
+        <div class="win">
+          <div class="win-img">
+            <div class="medal" aria-hidden="true">🥇</div>
+            <div class="muted">Фото спортсмена</div>
+          </div>
+          <div class="win-body">
+            <strong>Имя Фамилия</strong>
+            <span>Кубок России, 2025</span>
+          </div>
+        </div>
+
+        <div class="win">
+          <div class="win-img">
+            <div class="medal" aria-hidden="true">🥈</div>
+            <div class="muted">Фото спортсмена</div>
+          </div>
+          <div class="win-body">
+            <strong>Имя Фамилия</strong>
+            <span>Чемпионат области, 2025</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+        <p class="muted">Хочешь прогресс без ломки и перегруза — напиши мне. Подберём старт и нагрузку.</p>
+        <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать мне</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FORMAT -->
+  <section class="section" id="format">
+    <div class="container">
+      <div class="kicker">Формат работы</div>
+      <h2 style="margin-top:8px">Как проходят тренировки</h2>
+
+      <div class="grid-2" style="margin-top:18px">
+        <div class="tile">
+          <b>Групповые тренировки</b>
+          <span>Техника + физика + работа в паре. Атмосфера команды.</span>
+        </div>
+        <div class="tile">
+          <b>Персональные тренировки</b>
+          <span>Индивидуальные задания, техника, план прогресса под твою цель.</span>
+        </div>
+        <div class="tile">
+          <b>Подготовка к соревнованиям</b>
+          <span>План, отработка, тактика, подводка под старт.</span>
+        </div>
+        <div class="tile">
+          <b>Новички и опытные</b>
+          <span>Можно начать с нуля или выйти на следующий уровень.</span>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:18px">
+        Я подстраиваю нагрузку индивидуально — прогресс важнее “убиться на тренировке”.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONTENT -->
+  <section class="section" id="content">
+    <div class="container">
+      <div class="kicker">Контент</div>
+      <h2 style="margin-top:8px">Жизнь команды и лучшие видео</h2>
+
+      <div class="grid-2" style="margin-top:18px">
+        <div class="card">
+          <div class="social-card">
+            <div class="icon" aria-hidden="true">IG</div>
+            <div class="text">
+              <b>Instagram</b>
+              <span>Больше всего контента: видео, нарезки боёв, тренировки, атмосфера.</span>
+            </div>
+            <a class="btn" href="https://www.instagram.com/mishasever75/" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="social-card">
+            <div class="icon" aria-hidden="true">TG</div>
+            <div class="text">
+              <b>Telegram команды</b>
+              <span>Фото со спортсменами, тренировки, результаты, события.</span>
+            </div>
+            <a class="btn" href="https://t.me/viktorov_team" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <div class="social-card">
+            <div class="icon" aria-hidden="true">VK</div>
+            <div class="text">
+              <b>Сообщество VK</b>
+              <span>Новости и материалы для участников.</span>
+            </div>
+            <a class="btn" href="https://vk.com/mktbrus" target="_blank" rel="noopener">Открыть</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="social-card">
+            <div class="icon" aria-hidden="true">✉</div>
+            <div class="text">
+              <b>Написать мне</b>
+              <span>Самый быстрый способ начать: просто напиши в Telegram.</span>
+            </div>
+            <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- LOCATION -->
+  <section class="section" id="location">
+    <div class="container grid-2">
+      <div>
+        <div class="kicker">Где тренируемся</div>
+        <h2 style="margin-top:8px">Клуб «Сварог»</h2>
+        <p class="muted" style="margin-top:10px">
+          Москва, <b>Малыгина 3с2</b>
+        </p>
+
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать мне</a>
+          <a class="btn" href="tel:+79037489912">Позвонить: +7 903 748-99-12</a>
+        </div>
+
+        <p class="muted" style="margin-top:14px; max-width:60ch">
+          Если есть вопросы по уровню, нагрузке или самочувствию — напиши. Подберём формат и начнём спокойно.
+        </p>
+      </div>
+
+      <div class="map" aria-label="Карта">
+        <!-- Можно заменить на Яндекс/2ГИС позже; сейчас Google Maps embed -->
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=%D0%9C%D0%B0%D0%BB%D1%8B%D0%B3%D0%B8%D0%BD%D0%B0%203%D1%812%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- FOOTER -->
+  <footer class="section section-tight">
+    <div class="container">
+      <div class="footer-cta">
+        <div>
+          <div class="kicker">Готов начать?</div>
+          <h3>НАПИШИ МНЕ<br>И ПРИХОДИ В ЗАЛ</h3>
+          <div class="footer-links" aria-label="Контакты">
+            <a href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Telegram (лично)</a>
+            <a href="https://t.me/viktorov_team" target="_blank" rel="noopener">Telegram команды</a>
+            <a href="https://www.instagram.com/mishasever75/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://vk.com/mktbrus" target="_blank" rel="noopener">VK</a>
+            <a href="tel:+79037489912">+7 903 748-99-12</a>
+          </div>
+        </div>
+
+        <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">
+          Написать в Telegram
+        </a>
+      </div>
+
+      <div class="copyright">
+        © <span id="y"></span> Михаил Викторов. Тренировки: тайский бокс · бокс. Клуб «Сварог», Малыгина 3с2.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
