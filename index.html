@@ -27,7 +27,13 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
+    html {
+  scroll-behavior: smooth;
+}
+
     body{
+      padding-top: 0; /* остаётся 0, т.к. topbar fixed и скрыта */
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background: radial-gradient(1200px 800px at 20% -10%, rgba(140,31,31,.35), transparent 60%),
@@ -49,6 +55,34 @@
       opacity:.28;
       z-index:0;
     }
+
+    .hero-card .img{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      border-radius:16px;
+      /*padding: 22px;*/
+    }
+
+    .hero-card .img img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      display:block;
+    }
+
+    .hero-card .img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  /*background:*/
+  /*  linear-gradient(*/
+  /*    180deg,*/
+  /*    rgba(0,0,0,.15) 0%,*/
+  /*    rgba(0,0,0,.45) 100%*/
+  /*  );*/
+}
 
     a{color:inherit; text-decoration:none}
     a:hover{color:var(--text)}
@@ -79,13 +113,30 @@
 
     /* Topbar */
     .topbar{
-      position:sticky;
+      position:fixed;
       top:0;
+      left:0;
+      right:0;
       z-index:50;
+
       backdrop-filter: blur(10px);
       background:rgba(15,16,14,.68);
       border-bottom:1px solid var(--border);
+
+      /* hidden state */
+      transform: translateY(-110%);
+      opacity: 0;
+      pointer-events: none;
+
+      transition: transform .22s ease, opacity .22s ease;
     }
+
+    .topbar.is-visible{
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .topbar-inner{
       display:flex;
       align-items:center;
@@ -140,6 +191,33 @@
       border-color:var(--border);
       background:rgba(255,255,255,.03);
     }
+
+    .navicon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+
+.navicon svg{
+  width:16px;
+  height:16px;
+  fill: rgba(242,239,233,.9);
+}
+
+.navicon:hover{
+  transform: translateY(-1px);
+  border-color: rgba(185,174,161,.22);
+  background: rgba(255,255,255,.05);
+}
+
+.navicon:hover svg{
+  fill: var(--accent);
+}
 
     /* Buttons */
     .btn{
@@ -251,7 +329,7 @@
       inset:0;
       display:grid;
       place-items:center;
-      padding:22px;
+      /*padding:22px;*/
     }
     .placeholder{
       width:100%;
@@ -319,13 +397,36 @@
 
     /* Athletes */
     .athlete-top{
-      height:120px;
-      background:
-        radial-gradient(300px 120px at 25% 30%, rgba(140,31,31,.40), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.35));
-      border-bottom:1px solid var(--border);
-      position:relative;
-    }
+  position:relative;
+  height:160px;
+  border-bottom:1px solid var(--border);
+
+  background:
+    radial-gradient(300px 120px at 25% 30%, rgba(140,31,31,.35), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.35));
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* сама картинка */
+.athlete-top img{
+  min-width:100%;
+  min-height:100%;
+  width:auto;
+  height:auto;
+
+  object-fit: contain;
+  object-position: top;
+
+  /* чтобы картинка не прилипала к краям */
+  /*padding:10px;*/
+
+  /* чуть смягчает в темном фоне */
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,.45));
+}
     .badge{
       position:absolute;
       right:12px; bottom:12px;
@@ -380,9 +481,37 @@
       display:grid;
       place-items:center;
       text-align:center;
-      padding:12px;
+      /*padding:12px;*/
       color:rgba(242,239,233,.92);
+      overflow:hidden;
     }
+
+    /* сама картинка */
+.win-img img{
+  width:100%;
+  height:100%;
+  object-fit: cover;         /* или contain — см. ниже */
+  object-position: center;
+  display:block;
+}
+
+/* затемнение поверх фото (очень советую) */
+.win-img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.15) 0%,
+    rgba(0,0,0,.45) 100%
+  );
+}
+.win-img .medal{
+  position:absolute;
+  top:12px;
+  left:12px;
+  z-index:2;
+}
     .medal{
       position:absolute;
       top:12px; left:12px;
@@ -434,9 +563,10 @@
 
     /* Location */
     .map{
-      min-height:260px;
+      height:400px;
       border:1px solid var(--border);
       border-radius:18px;
+      margin-top: 10px;
       overflow:hidden;
       background:rgba(255,255,255,.02);
     }
@@ -509,15 +639,35 @@
           </div>
         </a>
 
-        <nav class="nav" aria-label="Социальные ссылки">
-          <a href="https://www.instagram.com/mishasever75/" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://t.me/viktorov_team" target="_blank" rel="noopener">Telegram команды</a>
-          <a href="https://vk.com/mktbrus" target="_blank" rel="noopener">VK</a>
-        </nav>
+        <nav class="nav" aria-label="Навигация">
+          <a class="navlink" href="#top">Обо мне</a>
+          <a class="navlink" href="#forwho">Для кого</a>
+          <a class="navlink" href="#format">Формат</a>
+          <a class="navlink" href="#champions">Мои чемпионы</a>
+          <a class="navlink" href="#wins">Достижения</a>
+          <a class="navlink" href="#location">Где</a>
 
+        <span class="nav-sep" aria-hidden="true"></span>
+
+<!--        <a class="navicon" href="https://t.me/viktorov_team" target="_blank" aria-label="Telegram">-->
+<!--          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Telegram</title><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>-->
+<!--        </a>-->
+<!--        <a class="navicon" href="https://www.instagram.com/mishasever75/" target="_blank" aria-label="Instagram">-->
+<!--          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Instagram</title><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>-->
+<!--        </a>-->
+<!--        <a class="navicon" href="https://vk.com/mktbrus" target="_blank" aria-label="VK">-->
+<!--          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VK</title><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z"/></svg>-->
+<!--        </a>-->
+      </nav>
+
+        <div>
+        <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">
+          +7 903 748 99 12
+        </a>
         <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">
           Написать
         </a>
+          </div>
       </div>
     </div>
   </header>
@@ -530,63 +680,54 @@
           <div class="kicker">Тренировки в Москве · клуб «Сварог»</div>
           <h1>МИХАИЛ<br>ВИКТОРОВ</h1>
           <div class="line-accent"></div>
-
           <p class="subtitle">
-            Я тренирую <b>тайский бокс</b> и <b>бокс</b>.<br>
-            Готовлю спортсменов до уровня соревнований. Новичков ставлю на технику с нуля.
+            Обучаю <b>боксу</b> и <b>тайскому боксу</b> (муай тай). Работаю и с новичками, и со спортсменами.
           </p>
+          <div class="chips" aria-label="Короткие факты">
+            <span class="chip">20+ лет опыта</span>
+            <span class="chip">Мастер спорта по боксу</span>
+            <span class="chip">КМС по тайскому боксу</span>
+            <span class="chip">Тренер сборной Москвы</span>
+            <span class="chip">Тренер Федерации тайского бокса Москвы</span>
+          </div>
 
           <div class="cta-row">
             <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">
               Написать мне в Telegram
             </a>
-            <a class="btn" href="https://www.instagram.com/mishasever75/" target="_blank" rel="noopener">
-              Смотреть Instagram
-            </a>
           </div>
 
-          <div class="helper">
-            Если есть сомнения по здоровью или нагрузке — напиши. Обсудим формат и подберём старт спокойно.
-          </div>
-
-          <div class="chips" aria-label="Короткие факты">
-            <span class="chip">Мастер спорта по боксу</span>
-            <span class="chip">КМС по тайскому боксу</span>
-            <span class="chip">Тренер Федерации тайского бокса Москвы</span>
-            <span class="chip">Тренер сборной Москвы</span>
-            <span class="chip">20+ лет опыта</span>
-          </div>
         </div>
 
         <div class="hero-card" aria-label="Главный визуал">
-          <div class="watermark" aria-hidden="true"></div>
           <div class="img">
-            <!-- TODO: заменишь placeholder на реальное фото (img) -->
-            <div class="placeholder">
-              <strong>Здесь будет сильное фото</strong>
-              <span>Лучше всего: я в зале / с командой / с перчатками. Один яркий кадр + тёмный градиент.</span>
-              <span class="muted">Пока оставил стильный плейсхолдер — выглядит достойно даже без фото.</span>
-            </div>
+<!--            <div>-->
+<!--            <div style="overflow: hidden;width:100%">-->
+              <img style="object-fit: cover" src="images/main3.jpg" alt="">
+<!--            </div>-->
+<!--              </div>-->
+<!--            <div class="placeholder" style="object-fit: cover" >-->
+
+<!--            </div>-->
           </div>
         </div>
       </div>
     </div>
   </main>
-
+  <div id="hero-sentinel" aria-hidden="true"></div>
   <hr class="divider">
 
   <!-- FOR WHO -->
   <section class="section" id="forwho">
     <div class="container grid-2">
       <div>
-        <div class="kicker">Кому подойдёт</div>
-        <h2>Кому я подойду</h2>
+<!--        <div class="kicker">Кому подойдёт</div>-->
+        <h2>Для кого</h2>
         <p class="muted" style="margin-top:10px; max-width:56ch">
-          Я работаю на результат: техника, физика, дисциплина и понятный прогресс.
+          Я работаю на результат: техника, физика, дисциплина и понятный прогресс.<br><br>
+          Внимательно слежу за состоянием спортсменов и подстраиваю нагрузку индивидуально — без «ушатать на первой тренировке».<br><br>
+          Если есть сомнения по здоровью или нагрузке — напиши. Обсудим формат и подберём спокойный старт.
         </p>
-        <div class="callout">
-          Я внимательно слежу за состоянием спортсменов и подстраиваю нагрузку индивидуально — без «ушатать на первой тренировке».
-        </div>
       </div>
 
       <div class="card card-pad">
@@ -611,6 +752,38 @@
 
   <hr class="divider">
 
+  <section class="section" id="format">
+    <div class="container">
+      <div class="kicker">Формат тренировок</div>
+      <h2 style="margin-top:8px">Как проходят тренировки</h2>
+
+      <div class="grid-2" style="margin-top:18px">
+        <div class="tile">
+          <b>Групповые тренировки</b>
+          <span>Техника + физика + работа в паре. Атмосфера команды.</span>
+        </div>
+        <div class="tile">
+          <b>Персональные тренировки</b>
+          <span>Индивидуальные задания, техника, план прогресса под твою цель.</span>
+        </div>
+        <div class="tile">
+          <b>Подготовка к соревнованиям</b>
+          <span>План, отработка, тактика, подводка под старт.</span>
+        </div>
+        <div class="tile">
+          <b>Новички и опытные</b>
+          <span>Можно начать с нуля или выйти на следующий уровень.</span>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:18px">
+        Я подстраиваю нагрузку индивидуально — прогресс важнее “убиться на тренировке”.
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
   <!-- MY CHAMPIONS -->
   <section class="section" id="champions">
     <div class="container">
@@ -620,6 +793,7 @@
       <div class="grid-3" style="margin-top:18px">
         <article class="card">
           <div class="athlete-top">
+            <img src="images/5.jpg">
             <div class="badge">GLORY</div>
           </div>
           <div class="card-pad">
@@ -637,6 +811,7 @@
 
         <article class="card">
           <div class="athlete-top">
+            <img src="images/4.jpg">
             <div class="badge">Кубки</div>
           </div>
           <div class="card-pad">
@@ -685,14 +860,13 @@
       </div>
 
       <div class="carousel" aria-label="Последние достижения (лента)">
-        <!-- TODO: заменяй заглушки на реальные фото и подписи -->
         <div class="win">
           <div class="win-img">
             <div class="medal" aria-hidden="true">🥇</div>
-            <div class="muted">Фото спортсмена</div>
+            <img src="images/6.jpg">
           </div>
           <div class="win-body">
-            <strong>Имя Фамилия</strong>
+            <strong>Евгений Момотов</strong>
             <span>Чемпионат Москвы, 2025</span>
           </div>
         </div>
@@ -700,40 +874,40 @@
         <div class="win">
           <div class="win-img">
             <div class="medal" aria-hidden="true">🥈</div>
-            <div class="muted">Фото спортсмена</div>
+            <img src="images/7.jpg">
           </div>
           <div class="win-body">
-            <strong>Имя Фамилия</strong>
+            <strong>Абубакар Юнусов</strong>
             <span>Кубок Москвы, 2025</span>
           </div>
         </div>
 
         <div class="win">
           <div class="win-img">
-            <div class="medal" aria-hidden="true">🥉</div>
-            <div class="muted">Фото спортсмена</div>
+            <div class="medal" aria-hidden="true">🥈</div>
+            <img src="images/8.jpg">
           </div>
           <div class="win-body">
-            <strong>Имя Фамилия</strong>
-            <span>Открытый турнир, 2025</span>
-          </div>
-        </div>
-
-        <div class="win">
-          <div class="win-img">
-            <div class="medal" aria-hidden="true">🥇</div>
-            <div class="muted">Фото спортсмена</div>
-          </div>
-          <div class="win-body">
-            <strong>Имя Фамилия</strong>
-            <span>Кубок России, 2025</span>
+            <strong>Матвей Куклин</strong>
+            <span>Кубок Москвы, 2025</span>
           </div>
         </div>
 
         <div class="win">
           <div class="win-img">
             <div class="medal" aria-hidden="true">🥈</div>
-            <div class="muted">Фото спортсмена</div>
+            <img src="images/9.jpeg">
+          </div>
+          <div class="win-body">
+            <strong>Имя Фамилия</strong>
+            <span>Чемпионат области, 2025</span>
+          </div>
+        </div>
+
+        <div class="win">
+          <div class="win-img">
+            <div class="medal" aria-hidden="true">🥈</div>
+            <img src="images/10.jpeg">
           </div>
           <div class="win-body">
             <strong>Имя Фамилия</strong>
@@ -745,39 +919,6 @@
       <div style="margin-top:16px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
         <p class="muted">Хочешь прогресс без ломки и перегруза — напиши мне. Подберём старт и нагрузку.</p>
         <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать мне</a>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- FORMAT -->
-  <section class="section" id="format">
-    <div class="container">
-      <div class="kicker">Формат работы</div>
-      <h2 style="margin-top:8px">Как проходят тренировки</h2>
-
-      <div class="grid-2" style="margin-top:18px">
-        <div class="tile">
-          <b>Групповые тренировки</b>
-          <span>Техника + физика + работа в паре. Атмосфера команды.</span>
-        </div>
-        <div class="tile">
-          <b>Персональные тренировки</b>
-          <span>Индивидуальные задания, техника, план прогресса под твою цель.</span>
-        </div>
-        <div class="tile">
-          <b>Подготовка к соревнованиям</b>
-          <span>План, отработка, тактика, подводка под старт.</span>
-        </div>
-        <div class="tile">
-          <b>Новички и опытные</b>
-          <span>Можно начать с нуля или выйти на следующий уровень.</span>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top:18px">
-        Я подстраиваю нагрузку индивидуально — прогресс важнее “убиться на тренировке”.
       </div>
     </div>
   </section>
@@ -844,31 +985,44 @@
 
   <!-- LOCATION -->
   <section class="section" id="location">
-    <div class="container grid-2">
-      <div>
-        <div class="kicker">Где тренируемся</div>
-        <h2 style="margin-top:8px">Клуб «Сварог»</h2>
-        <p class="muted" style="margin-top:10px">
-          Москва, <b>Малыгина 3с2</b>
-        </p>
 
-        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать мне</a>
-          <a class="btn" href="tel:+79037489912">Позвонить: +7 903 748-99-12</a>
+    <div class="container">
+      <div class="kicker">Где тренируемся</div>
+      <h2 style="margin-top:8px">Клуб «Сварог»</h2>
+      <div class="grid-2">
+        <div class="map" aria-label="Карта">
+          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aacb0158ceb630b62b8ac7b81be96fb726881006c79fc6cf02774c329d4f264f4&amp;source=constructor" width="500" height="400" frameborder="0"></iframe>
         </div>
 
-        <p class="muted" style="margin-top:14px; max-width:60ch">
-          Если есть вопросы по уровню, нагрузке или самочувствию — напиши. Подберём формат и начнём спокойно.
-        </p>
-      </div>
+        <div>
+          <p class="muted" style="margin-top:10px">
+            Тренировки проходят по адресу: Москва, <b>Малыгина 3с2</b>.
+          </p>
+          <div class="route-buttons">
+            <a class="btn"
+              href="https://yandex.ru/maps/?rtext=~Москва,%20Малыгина%203с2"
+               target="_blank"
+               rel="noopener">
+              Как доехать (Яндекс)
+            </a>
+            <a class="btn"
+               href="https://2gis.ru/moscow/directions?to=Москва,%20Малыгина%203с2"
+               target="_blank"
+               rel="noopener">
+              Как доехать (2ГИС)
+            </a>
+          </div>
 
-      <div class="map" aria-label="Карта">
-        <!-- Можно заменить на Яндекс/2ГИС позже; сейчас Google Maps embed -->
-        <iframe
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=%D0%9C%D0%B0%D0%BB%D1%8B%D0%B3%D0%B8%D0%BD%D0%B0%203%D1%812%2C%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&output=embed">
-        </iframe>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn btn-primary" href="https://t.me/mike_viktorov" target="_blank" rel="noopener">Написать мне</a>
+            <a class="btn" href="tel:+79037489912">Позвонить: +7 903 748-99-12</a>
+          </div>
+
+<!--          <p class="muted" style="margin-top:14px; max-width:60ch">-->
+<!--            Если есть вопросы по уровню, нагрузке или самочувствию — напиши. Подберём формат и начнём спокойно.-->
+<!--          </p>-->
+
+        </div>
       </div>
     </div>
   </section>
@@ -902,8 +1056,39 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+<script>
+  // year
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  // topbar reveal after hero
+  const topbar = document.querySelector(".topbar");
+  const sentinel = document.getElementById("hero-sentinel");
+
+  // На всякий случай: если чего-то нет — просто не ломаем страницу
+  if (topbar && sentinel && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      // sentinel виден = мы ещё вверху (hero не проскроллен) => шапку скрываем
+      // sentinel не виден = проскроллили hero => шапку показываем
+      if (entry.isIntersecting) topbar.classList.remove("is-visible");
+      else topbar.classList.add("is-visible");
+    }, {
+      root: null,
+      // когда верх "маяка" выходит за верх экрана — считаем, что hero закончился
+      threshold: 0
+    });
+
+    io.observe(sentinel);
+  } else if (topbar && sentinel) {
+    // fallback для очень старых браузеров
+    const heroBottom = () => sentinel.getBoundingClientRect().top <= 0;
+    const onScroll = () => {
+      if (heroBottom()) topbar.classList.add("is-visible");
+      else topbar.classList.remove("is-visible");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+</script>
 </body>
 </html>
