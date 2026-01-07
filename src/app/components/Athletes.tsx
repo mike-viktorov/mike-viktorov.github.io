@@ -52,7 +52,7 @@ export function Athletes() {
         <p className="text-xl text-center text-gray-600 mb-12">
           Воспитанники тренера — чемпионы и призёры престижных соревнований
         </p>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {athletes.map((athlete, index) => (
             <div
               key={index}

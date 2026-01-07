@@ -78,13 +78,13 @@ export function Location() {
             {/* Карта */}
             <div className="rounded-lg overflow-hidden shadow-sm h-[500px]">
               <iframe
-                src="https://yandex.ru/map-widget/v1/?ll=37.675819%2C55.866869&z=16&pt=37.675819,55.866869,pm2rdm"
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                allowFullScreen={true}
-                style={{ position: 'relative' }}
-                title="Карта локации"
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3Aed45773d2be6babc8dfb71c45c8ae6a5e5c1772ff4472753f4231a346e9aab82&amp;source=constructor"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allowFullScreen={true}
+                  style={{position: 'relative'}}
+                  title="Карта локации"
               />
             </div>
           </div>
