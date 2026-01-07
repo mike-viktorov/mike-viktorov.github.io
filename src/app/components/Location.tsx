@@ -2,8 +2,8 @@ import { MapPin, Bus, Train, ExternalLink } from 'lucide-react';
 
 export function Location() {
   // Координаты: Москва, СВАО, ул. Малыгина 3с2
-  const yandexMapsUrl = 'https://yandex.ru/maps/?rtext=~55.866869,37.675819&rtt=auto';
-  const dgisUrl = 'https://2gis.ru/moscow/geo/37.675819%2C55.866869';
+  const yandexMapsUrl = 'https://yandex.ru/maps/?rtext=~55.877652,37.699651&rtt=auto';
+  const dgisUrl = 'https://2gis.ru/moscow/directions/points/%7C37.699666%2C55.877595%3B4504235282631417?m=37.62017%2C55.753873%2F10.76';
   
   return (
     <section id="location" className="py-16 bg-white">
