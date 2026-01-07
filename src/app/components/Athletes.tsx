@@ -34,6 +34,15 @@ export function Athletes() {
         'Участник проф. боёв Russian Challenge',
       ],
     },
+    {
+      name: 'Евгений Момотов',
+      image: '/images/evgenii-momotov3.jpg',
+      achievements: [
+        'Призёр Кубка России по муайтай',
+        'Пятикратный чемпион Москвы',
+        'Пятикратный чемпион Кубка Москвы по муайтай',
+      ],
+    },
   ];
 
   return (
