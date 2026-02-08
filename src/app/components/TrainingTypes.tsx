@@ -3,9 +3,9 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function TrainingTypes() {
   return (
-    <section id="training" className="py-16 bg-white">
+    <section id="training" className="py-16 bg-white" aria-labelledby="training-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-12 text-gray-900">Типы тренировок</h2>
+        <h2 id="training-heading" className="text-4xl text-center mb-12 text-gray-900">Типы тренировок</h2>
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Индивидуальные тренировки */}
           <div className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">

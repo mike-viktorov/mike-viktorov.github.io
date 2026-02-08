@@ -25,9 +25,9 @@ export function Approach() {
   ];
 
   return (
-    <section id="approach" className="py-16 bg-gray-50">
+    <section id="approach" className="py-16 bg-gray-50" aria-labelledby="approach-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-4 text-gray-900">Подход к обучению</h2>
+        <h2 id="approach-heading" className="text-4xl text-center mb-4 text-gray-900">Подход к обучению</h2>
         <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
           Индивидуальный подход к каждому спортсмену в зависимости от их целей и задач. 
           Умение найти ключ к разным людям — залог успешной тренерской работы.

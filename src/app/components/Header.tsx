@@ -22,11 +22,11 @@ export function Header() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 shadow-sm" role="banner">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center" aria-hidden="true">
               <span className="text-white">МВ</span>
             </div>
             <div>
@@ -36,7 +36,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-6" role="navigation" aria-label="Основная навигация">
             {menuItems.map((item) => (
               <button
                 key={item.id}
@@ -59,7 +59,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3">
+          <nav className="md:hidden mt-4 pb-4 flex flex-col gap-3" role="navigation" aria-label="Мобильная навигация">
             {menuItems.map((item) => (
               <button
                 key={item.id}

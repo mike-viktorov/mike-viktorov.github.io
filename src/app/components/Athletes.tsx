@@ -46,9 +46,9 @@ export function Athletes() {
   ];
 
   return (
-    <section id="athletes" className="py-16 bg-gray-50">
+    <section id="athletes" className="py-16 bg-gray-50" aria-labelledby="athletes-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-4 text-gray-900">Выдающиеся спортсмены</h2>
+        <h2 id="athletes-heading" className="text-4xl text-center mb-4 text-gray-900">Выдающиеся спортсмены</h2>
         <p className="text-xl text-center text-gray-600 mb-12">
           Воспитанники тренера — чемпионы и призёры престижных соревнований
         </p>

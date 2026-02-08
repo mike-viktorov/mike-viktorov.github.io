@@ -6,9 +6,9 @@ export function Location() {
   const dgisUrl = 'https://2gis.ru/moscow/directions/points/%7C37.699666%2C55.877595%3B4504235282631417?m=37.62017%2C55.753873%2F10.76';
   
   return (
-    <section id="location" className="py-16 bg-white">
+    <section id="location" className="py-16 bg-white" aria-labelledby="location-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-12 text-gray-900">Где проходят занятия</h2>
+        <h2 id="location-heading" className="text-4xl text-center mb-12 text-gray-900">Где проходят занятия</h2>
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 mb-8">
             {/* Информация о локации */}

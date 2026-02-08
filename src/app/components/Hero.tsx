@@ -2,7 +2,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden" aria-label="Главная секция">
       {/* Фоновое видео */}
       <div className="absolute inset-0 w-full h-full">
         <video

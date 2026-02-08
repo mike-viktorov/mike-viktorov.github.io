@@ -25,9 +25,9 @@ export function Credentials() {
   ];
 
   return (
-    <section id="about" className="py-16 bg-white">
+    <section id="about" className="py-16 bg-white" aria-labelledby="credentials-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-12 text-gray-900">Регалии тренера</h2>
+        <h2 id="credentials-heading" className="text-4xl text-center mb-12 text-gray-900">Регалии тренера</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {credentials.map((credential, index) => {
             const Icon = credential.icon;

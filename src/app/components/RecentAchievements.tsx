@@ -67,9 +67,9 @@ export function RecentAchievements() {
   };
 
   return (
-    <section id="achievements" className="py-16 bg-white">
+    <section id="achievements" className="py-16 bg-white" aria-labelledby="achievements-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-12 text-gray-900">Последние достижения</h2>
+        <h2 id="achievements-heading" className="text-4xl text-center mb-12 text-gray-900">Последние достижения</h2>
         <div className="relative">
           <div className="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             <div className="flex gap-6 px-4" style={{ width: 'max-content' }}>

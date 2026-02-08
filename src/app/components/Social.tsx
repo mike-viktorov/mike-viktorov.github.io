@@ -26,9 +26,9 @@ export function Social() {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50" aria-labelledby="social-heading">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl text-center mb-4 text-gray-900">Фото и Видео</h2>
+        <h2 id="social-heading" className="text-4xl text-center mb-4 text-gray-900">Фото и Видео</h2>
         <p className="text-xl text-center text-gray-600 mb-12">
           Подписывайтесь на наши социальные сети
         </p>
@@ -39,7 +39,10 @@ export function Social() {
               <a
                 key={index}
                 href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+                aria-label={`Перейти на ${social.name}`}
               >
                 <div className={`w-16 h-16 ${social.color} rounded-full flex items-center justify-center mb-4 mx-auto`}>
                   <Icon className="w-8 h-8 text-white" />
