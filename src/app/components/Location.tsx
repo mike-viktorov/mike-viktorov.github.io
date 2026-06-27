@@ -38,7 +38,7 @@ const contactChannels = [
   },
   {
     name: 'WhatsApp',
-    href: 'https://wa.me/79268790946',
+    href: 'https://wa.me/79037489912',
     Icon: WhatsAppIcon,
     iconColor: 'text-[#25D366]',
     ariaLabel: 'Написать в WhatsApp',
