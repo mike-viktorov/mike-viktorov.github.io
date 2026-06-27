@@ -71,6 +71,15 @@ export function Hero() {
         >
           Записаться на тренировку
         </button>
+        <p className="mt-6 text-lg text-gray-200">
+          или позвонить:{' '}
+          <a
+            href="tel:+79268790946"
+            className="underline underline-offset-4 hover:text-white whitespace-nowrap"
+          >
+            8 (926) 879-09-46
+          </a>
+        </p>
       </div>
 
       {/* Индикатор прокрутки */}
